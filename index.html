@@ -356,6 +356,8 @@
       cursor: pointer;
       transition: 0.25s ease;
       text-align: left;
+      white-space: nowrap;
+      flex: 0 0 auto;
     }
 
     .tab-btn:hover,
@@ -380,7 +382,6 @@
     }
 
     .focus-pills,
-    .skills-subtabs,
     .skills-pills {
       display: flex;
       flex-wrap: wrap;
@@ -391,7 +392,44 @@
     }
 
     .skills-subtabs {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 6px;
       margin-bottom: 18px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(115,224,255,0.4) transparent;
+    }
+
+    .skills-subtabs::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .skills-subtabs::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .skills-subtabs::-webkit-scrollbar-thumb {
+      background: rgba(115,224,255,0.35);
+      border-radius: 999px;
+    }
+
+    #tab-skills {
+      width: 100%;
+      text-align: left;
+    }
+
+    .skills-subpanel {
+      width: 100%;
+      text-align: left;
+    }
+
+    .skills-pills {
+      justify-content: flex-start;
     }
 
     .pill {
@@ -1043,10 +1081,6 @@
       <div class="contact-grid">
         <article class="contact-card reveal">
           <h3>Reach out</h3>
-          <p>
-            This page is intentionally structured so your contact section feels premium rather than like a generic footer.
-          </p>
-
           <div class="contact-list">
             <div class="contact-item">
               <a href="mailto:premankur.banerjee@usc.edu">
