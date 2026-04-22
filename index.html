@@ -4,16 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Premankur Banerjee | VR/AR Haptics Robotics Researcher</title>
-  <meta name="description" content="Premankur Banerjee — VR/AR Haptics Robotics Researcher building multisensory, physically coherent interactive systems across haptics, robotics, XR, and human-computer interaction." />
+  <meta
+    name="description"
+    content="Premankur Banerjee — VR/AR Haptics Robotics Researcher building multisensory, physically coherent interactive systems across haptics, robotics, XR, and human-computer interaction."
+  />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #07111f;
       --bg-soft: rgba(10, 22, 40, 0.72);
-      --panel: rgba(255, 255, 255, 0.08);
-      --panel-strong: rgba(255, 255, 255, 0.12);
       --text: #ecf4ff;
       --muted: #9cb3cf;
       --line: rgba(255, 255, 255, 0.12);
@@ -21,12 +23,13 @@
       --accent-2: #9d7bff;
       --accent-3: #4af1b4;
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      --radius: 24px;
       --maxw: 1220px;
     }
 
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: 'Inter', system-ui, sans-serif;
@@ -53,8 +56,15 @@
       z-index: 0;
     }
 
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
     .page {
       position: relative;
@@ -109,10 +119,6 @@
       mix-blend-mode: screen;
     }
 
-    .brand-copy {
-      min-width: 0;
-    }
-
     .brand-copy strong {
       display: block;
       font-family: 'Space Grotesk', sans-serif;
@@ -156,13 +162,18 @@
       margin: 28px auto 0;
       padding: 40px 20px 20px;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 28px;
+      grid-template-columns: 1fr;
+      gap: 22px;
       align-items: stretch;
     }
 
     .hero-card,
-    .glass {
+    .glass,
+    .info-card,
+    .timeline-card,
+    .project-card,
+    .cv-card,
+    .contact-card {
       border: 1px solid var(--line);
       background: var(--bg-soft);
       backdrop-filter: blur(18px);
@@ -174,10 +185,7 @@
       padding: 34px;
       position: relative;
       overflow: hidden;
-      min-height: 640px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      min-height: auto;
     }
 
     .hero-main::before {
@@ -213,13 +221,59 @@
       box-shadow: 0 0 20px rgba(74,241,180,0.8);
     }
 
-    .hero h1 {
+    .hero-intro {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .hero-top {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 10px 30px rgba(115,224,255,0.25);
+    }
+
+    .hero-top-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero p.lead,
+    .hero-bio {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      max-width: 100%;
+    }
+
+    .hero-signal-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 980px;
+    }
+
+    .hero h1,
+    .hero-title-wide {
       margin: 0;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.8rem, 6vw, 5.6rem);
+      font-size: clamp(3.2rem, 8vw, 6.4rem);
       line-height: 0.95;
       letter-spacing: -0.045em;
-      max-width: 10ch;
+      max-width: 100%;
     }
 
     .gradient-text {
@@ -227,14 +281,6 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-    }
-
-    .hero p.lead {
-      margin: 22px 0 0;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.8;
-      max-width: 62ch;
     }
 
     .hero-actions {
@@ -262,157 +308,64 @@
       box-shadow: 0 14px 32px rgba(115, 224, 255, 0.22);
     }
 
-    .btn-primary:hover,
-    .btn-secondary:hover,
-    .project-card:hover,
-    .info-card:hover,
-    .timeline-card:hover,
-    .contact-card:hover,
-    .cv-card:hover {
-      transform: translateY(-3px);
-    }
-
     .btn-secondary {
       border-color: var(--line);
       background: rgba(255,255,255,0.04);
       color: var(--text);
     }
 
-    .hero-metrics {
-      margin-top: 34px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .info-card:hover,
+    .timeline-card:hover,
+    .project-card:hover,
+    .cv-card:hover,
+    .contact-card:hover {
+      transform: translateY(-3px);
     }
 
-    .metric {
-      padding: 18px;
-      border-radius: 22px;
+    .focus-tabs {
+      padding: 24px 28px;
+    }
+
+    .focus-tabs-header {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .metric strong {
-      display: block;
-      font-size: 1.55rem;
-      margin-bottom: 6px;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .metric span {
       color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.45;
-    }
-
-    .hero-side {
-      display: grid;
-      grid-template-rows: 1.25fr 0.75fr;
-      gap: 22px;
-    }
-
-    .signal-card,
-    .focus-card {
-      padding: 28px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .signal-card::after {
-      content: "";
-      position: absolute;
-      width: 280px;
-      height: 280px;
-      right: -80px;
-      top: -90px;
-      background: radial-gradient(circle, rgba(157,123,255,0.22), transparent 62%);
-      filter: blur(10px);
-    }
-
-    .section-kicker {
-      color: var(--accent);
-      font-size: 0.84rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font: inherit;
       font-weight: 700;
-      margin-bottom: 12px;
+      cursor: pointer;
+      transition: 0.25s ease;
     }
 
-    .signal-visual {
-      margin: 24px 0;
-      height: 220px;
-      border-radius: 26px;
-      position: relative;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
-        radial-gradient(circle at 20% 35%, rgba(115,224,255,0.30), transparent 22%),
-        radial-gradient(circle at 70% 30%, rgba(157,123,255,0.22), transparent 24%),
-        radial-gradient(circle at 48% 70%, rgba(74,241,180,0.16), transparent 20%),
-        rgba(0,0,0,0.18);
-      border: 1px solid rgba(255,255,255,0.08);
-      overflow: hidden;
+    .tab-btn:hover,
+    .tab-btn.active {
+      color: var(--text);
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(115,224,255,0.28);
     }
 
-    .signal-ring,
-    .signal-core,
-    .signal-path {
-      position: absolute;
-      inset: 50% auto auto 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
+    .tab-panel {
+      display: none;
     }
 
-    .signal-ring {
-      width: 160px;
-      height: 160px;
-      border: 1px solid rgba(115,224,255,0.25);
-      box-shadow: 0 0 0 18px rgba(115,224,255,0.06), 0 0 0 42px rgba(115,224,255,0.03);
-      animation: pulse 4s ease-in-out infinite;
-    }
-
-    .signal-core {
-      width: 22px;
-      height: 22px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-3));
-      box-shadow: 0 0 25px rgba(115,224,255,0.55);
-    }
-
-    .signal-path {
-      width: 280px;
-      height: 280px;
-      border: 1px dashed rgba(255,255,255,0.14);
-    }
-
-    .signal-card h3,
-    .focus-card h3,
-    .section-header h2,
-    .project-card h3,
-    .cv-card h3,
-    .contact-card h3,
-    .timeline-card h3,
-    .info-card h3 {
-      margin: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      letter-spacing: -0.02em;
-    }
-
-    .signal-card p,
-    .focus-card p,
-    .section-header p,
-    .project-card p,
-    .cv-card p,
-    .contact-card p,
-    .timeline-card p,
-    .info-card p {
-      color: var(--muted);
-      line-height: 1.7;
+    .tab-panel.active {
+      display: block;
     }
 
     .focus-pills {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 18px;
     }
 
     .pill {
@@ -430,6 +383,15 @@
       padding: 60px 20px 0;
     }
 
+    .section-kicker {
+      color: var(--accent);
+      font-size: 0.84rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
     .section-header {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
@@ -438,9 +400,30 @@
       margin-bottom: 26px;
     }
 
+    .section-header h2,
+    .project-card h3,
+    .cv-card h3,
+    .contact-card h3,
+    .timeline-card h3,
+    .info-card h3 {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
     .section-header h2 {
       font-size: clamp(2rem, 4vw, 3.2rem);
       line-height: 1;
+    }
+
+    .section-header p,
+    .project-card p,
+    .cv-card p,
+    .contact-card p,
+    .timeline-card p,
+    .info-card p {
+      color: var(--muted);
+      line-height: 1.7;
     }
 
     .about-grid {
@@ -456,11 +439,6 @@
     .cv-card,
     .contact-card {
       padding: 26px;
-      border: 1px solid var(--line);
-      background: var(--bg-soft);
-      backdrop-filter: blur(18px);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
       transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
@@ -507,7 +485,10 @@
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    .timeline-item:first-child { border-top: 0; padding-top: 0; }
+    .timeline-item:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
 
     .timeline-year {
       color: var(--accent);
@@ -628,7 +609,9 @@
       color: var(--muted);
     }
 
-    .footer-card strong { color: var(--text); }
+    .footer-card strong {
+      color: var(--text);
+    }
 
     .reveal {
       opacity: 0;
@@ -641,81 +624,74 @@
       transform: translateY(0);
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.75; }
-      50% { transform: translate(-50%, -50%) scale(1.03); opacity: 1; }
-    }
-
     @media (max-width: 1080px) {
-      .hero,
-      .about-grid,
       .section-header,
+      .about-grid,
       .project-grid,
       .cv-grid,
       .contact-grid {
         grid-template-columns: 1fr;
       }
-
-      .hero-side {
-        grid-template-rows: auto;
-      }
     }
 
     @media (max-width: 760px) {
-      .nav-wrap { top: 8px; padding: 10px 12px 0; }
+      .nav-wrap {
+        top: 8px;
+        padding: 10px 12px 0;
+      }
+
       nav {
         border-radius: 26px;
         padding: 14px;
         flex-direction: column;
         align-items: stretch;
       }
+
       .nav-links {
         justify-content: space-between;
       }
-      .hero { padding-top: 22px; }
+
+      .hero {
+        padding-top: 22px;
+      }
+
       .hero-main,
-      .signal-card,
-      .focus-card,
+      .focus-tabs,
       .info-card,
       .timeline-card,
       .project-card,
       .cv-card,
-      .contact-card { padding: 22px; }
-      .hero-main { min-height: auto; }
-      .hero-metrics,
-      .stats-grid { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+      .contact-card {
+        padding: 22px;
+      }
+
+      .hero-top {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .hero-img {
+        width: 110px;
+        height: 110px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
       .footer-card {
         flex-direction: column;
         align-items: flex-start;
       }
     }
-    .hero-intro {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    
-    .hero-top {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-    
-    .hero-img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 10px 30px rgba(115,224,255,0.25);
-    }
-    
-    .hero-title {
-      width: 100%;
-    }
   </style>
 </head>
+
 <body>
   <div class="page">
     <div class="nav-wrap">
@@ -724,9 +700,10 @@
           <div class="brand-mark"></div>
           <div class="brand-copy">
             <strong>Premankur Banerjee</strong>
-            <span>VR / AR • Haptics • Robotics • Interactive Systems</span>
+            <span>Haptics • VR / AR / MR • Robotics • Interactive Systems • HCI • HRI</span>
           </div>
         </div>
+
         <div class="nav-links">
           <a href="#home" class="active">Home</a>
           <a href="#about">About</a>
@@ -739,63 +716,41 @@
 
     <header class="hero" id="home">
       <section class="hero-card hero-main reveal">
-        <div>
-          <div class="eyebrow"><span class="dot"></span> USC • HaRVI Lab • Multisensory XR Research</div>
-          <div class="hero-intro">
-            <!-- Row 1: Image + Bio -->
-            <div class="hero-top">
-              <img src="pic.jpg" alt="Premankur Banerjee" class="hero-img">
-              <p class="lead">
+        <div class="eyebrow"><span class="dot"></span> USC • HaRVI Lab • Multisensory XR Research</div>
+
+        <div class="hero-intro">
+          <div class="hero-top">
+            <img src="pic.jpg" alt="Premankur Banerjee" class="hero-img">
+
+            <div class="hero-top-copy">
+              <p class="lead hero-bio">
                 I am Premankur Banerjee, a VR/AR haptics and robotics researcher building multisensory interactive systems that make virtual experiences feel more embodied, expressive, and physically coherent.
               </p>
+
+              <p class="hero-signal-text">
+                My work sits at the intersection of haptics, robotics, XR, and HCI — from social touch in virtual reality to physically grounded surfing simulations and wearable multimodal feedback. I build interfaces where motion, sensation, perception, and embodiment come together as one coherent interaction loop.
+              </p>
             </div>
-            <!-- Row 2: Full-width Heading -->
-            <h1 class="hero-title">
-              Designing the <span class="gradient-text">future of touch</span> in virtual and augmented worlds.
-            </h1>
           </div>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">Explore Projects</a>
-            <a class="btn btn-secondary" href="#contact">Get in Touch</a>
-          </div>
+
+          <h1 class="hero-title-wide">
+            Designing the <span class="gradient-text">future of touch</span> in virtual and augmented worlds.
+          </h1>
         </div>
 
-        <div class="hero-metrics">
-          <div class="metric">
-            <strong>XR + Haptics</strong>
-            <span>Human-centered systems spanning VR, AR, wearable feedback, and robotics.</span>
-          </div>
-          <div class="metric">
-            <strong>Embodied Design</strong>
-            <span>Research focused on perception, realism, social touch, and multisensory interaction.</span>
-          </div>
-          <div class="metric">
-            <strong>Prototype to Study</strong>
-            <span>From hardware-software integration to evaluation in immersive environments.</span>
-          </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">Explore Projects</a>
+          <a class="btn btn-secondary" href="#contact">Get in Touch</a>
         </div>
       </section>
 
-      <div class="hero-side">
-        <section class="glass signal-card reveal">
-          <div class="section-kicker">Research Signal</div>
-          <h3>Multisensory systems for immersive interaction</h3>
-          <p>
-            My work sits at the intersection of haptics, robotics, XR, and HCI — from social touch in virtual reality to physically grounded surfing simulations and wearable multimodal feedback.
-          </p>
-          <div class="signal-visual" aria-hidden="true">
-            <div class="signal-path"></div>
-            <div class="signal-ring"></div>
-            <div class="signal-core"></div>
-          </div>
-          <p>
-            I build interfaces where motion, sensation, perception, and embodiment come together as one coherent interaction loop.
-          </p>
-        </section>
+      <section class="glass focus-tabs reveal">
+        <div class="focus-tabs-header">
+          <button class="tab-btn active" data-tab="focus">Focus Areas</button>
+          <button class="tab-btn" data-tab="skills">Skills</button>
+        </div>
 
-        <section class="glass focus-card reveal">
-          <div class="section-kicker">Focus Areas</div>
-          <h3>Core themes</h3>
+        <div class="tab-panel active" id="tab-focus">
           <div class="focus-pills">
             <span class="pill">Virtual Reality</span>
             <span class="pill">Augmented Reality</span>
@@ -806,8 +761,15 @@
             <span class="pill">Social Touch</span>
             <span class="pill">Human-Computer Interaction</span>
           </div>
-        </section>
-      </div>
+        </div>
+
+        <div class="tab-panel" id="tab-skills">
+          <div class="focus-pills">
+            <span class="pill">C++</span>
+            <span class="pill">C#</span>
+          </div>
+        </div>
+      </section>
     </header>
 
     <section id="about">
@@ -827,6 +789,7 @@
           <p>
             I design and evaluate immersive systems where sensing, control, and haptic feedback work together. That includes wearable haptic devices, real-time interaction pipelines, multimodal rendering, and user-centered experiments to understand comfort, realism, and social perception.
           </p>
+
           <div class="stats-grid">
             <div class="mini-stat">
               <strong>Haptics + XR</strong>
@@ -857,6 +820,7 @@
                 <p>Publicly listed with USC’s Haptics Robotics and Virtual Interaction Lab.</p>
               </div>
             </div>
+
             <div class="timeline-item">
               <div class="timeline-year">Scholar</div>
               <div>
@@ -864,6 +828,7 @@
                 <p>Public profile associated with the University of Southern California and research in haptics, VR/AR, HCI, and robotics.</p>
               </div>
             </div>
+
             <div class="timeline-item">
               <div class="timeline-year">2025</div>
               <div>
@@ -871,6 +836,7 @@
                 <p>Co-authored work on real-time, bi-directional social touch in multi-user VR.</p>
               </div>
             </div>
+
             <div class="timeline-item">
               <div class="timeline-year">2026</div>
               <div>
@@ -981,7 +947,7 @@
           <h2>Let’s build immersive systems that people can truly feel.</h2>
         </div>
         <p>
-          Use this section for collaboration, research inquiries, project demos, speaking, or academic contact. Replace the placeholder details with your preferred contact channels.
+          Use this section for collaboration, research inquiries, project demos, speaking, or academic contact.
         </p>
       </div>
 
@@ -989,8 +955,9 @@
         <article class="contact-card reveal">
           <h3>Reach out</h3>
           <p>
-            This page is intentionally structured so your contact section feels premium rather than like a generic footer. Add only the channels you actually want public.
+            This page is intentionally structured so your contact section feels premium rather than like a generic footer.
           </p>
+
           <div class="contact-list">
             <div class="contact-item">
               <a href="mailto:premankur.banerjee@usc.edu">
@@ -1001,6 +968,7 @@
                 <span>premankur.banerjee@usc.edu</span>
               </a>
             </div>
+
             <div class="contact-item">
               <a href="https://www.linkedin.com/in/premankur-banerjee-4a5564159/" target="_blank" rel="noreferrer">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1009,14 +977,12 @@
                 <span>LinkedIn</span>
               </a>
             </div>
+
             <div class="contact-item">
               <a href="https://scholar.google.com/citations?hl=en&user=jOcj0OUAAAAJ" target="_blank" rel="noreferrer">
-                
-                <!-- Google Scholar Icon -->
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3Zm0 13.18L3.74 11 12 6.82 20.26 11 12 16.18ZM5 13.97v3.05C5 18.66 8.13 20 12 20s7-1.34 7-2.98v-3.05l-7 3.82-7-3.82Z"/>
+                  <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3Zm0 13.18L3.74 11 12 6.82 20.26 11 12 16.18ZM5 13.97v3.05C5 18.66 8.13 20 12 20s7-1.34 7-2.98v-3.05l-7 3.82-7-3.82Z"></path>
                 </svg>
-            
                 <span>Google Scholar</span>
               </a>
             </div>
@@ -1039,7 +1005,7 @@
     <footer>
       <div class="footer-card reveal">
         <div>
-          <strong>Premankur Banerjee</strong><br/>
+          <strong>Premankur Banerjee</strong><br />
           VR / AR Haptics Robotics Researcher
         </div>
         <div>Designed as a bold research portfolio landing page.</div>
@@ -1053,10 +1019,12 @@
 
     const setActiveLink = () => {
       let current = 'home';
+
       sections.forEach(section => {
         const top = window.scrollY;
         const offset = section.offsetTop - 140;
         const height = section.offsetHeight;
+
         if (top >= offset && top < offset + height) {
           current = section.getAttribute('id');
         }
@@ -1077,6 +1045,21 @@
     }, { threshold: 0.14 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.tab;
+
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanels.forEach(panel => panel.classList.remove('active'));
+
+        button.classList.add('active');
+        document.getElementById(`tab-${target}`).classList.add('active');
+      });
+    });
   </script>
 </body>
 </html>
