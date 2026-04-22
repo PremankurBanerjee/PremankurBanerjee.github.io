@@ -690,19 +690,29 @@
         align-items: flex-start;
       }
     }
-    .hero-intro-row {
+    .hero-intro {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .hero-top {
       display: flex;
       align-items: center;
       gap: 24px;
     }
     
     .hero-img {
-      width: 150px;
-      height: 150px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid rgba(255,255,255,0.2);
       box-shadow: 0 10px 30px rgba(115,224,255,0.25);
+    }
+    
+    .hero-title {
+      width: 100%;
     }
   </style>
 </head>
@@ -731,18 +741,18 @@
       <section class="hero-card hero-main reveal">
         <div>
           <div class="eyebrow"><span class="dot"></span> USC • HaRVI Lab • Multisensory XR Research</div>
-          <div class="hero-intro-row">
-
-            <img src="pic.jpg" alt="Premankur Banerjee" class="hero-img">
-            <div>
+          <div class="hero-intro">
+            <!-- Row 1: Image + Bio -->
+            <div class="hero-top">
+              <img src="pic.jpg" alt="Premankur Banerjee" class="hero-img">
               <p class="lead">
                 I am Premankur Banerjee, a VR/AR haptics and robotics researcher building multisensory interactive systems that make virtual experiences feel more embodied, expressive, and physically coherent.
               </p>
-              <h1>
-                Designing the <span class="gradient-text">future of touch</span> in virtual and augmented worlds.
-              </h1>
             </div>
-          
+            <!-- Row 2: Full-width Heading -->
+            <h1 class="hero-title">
+              Designing the <span class="gradient-text">future of touch</span> in virtual and augmented worlds.
+            </h1>
           </div>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects">Explore Projects</a>
