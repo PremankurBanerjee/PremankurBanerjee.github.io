@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premankur Banerjee | VR/AR Haptics Robotics Researcher</title>
+  <meta
+    name="description"
+    content="Premankur Banerjee — VR/AR Haptics Robotics Researcher building multisensory, physically coherent interactive systems across haptics, robotics, XR, and human-computer interaction."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: rgba(10, 22, 40, 0.72);
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.12);
+      --text: #ecf4ff;
+      --muted: #9cb3cf;
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #73e0ff;
+      --accent-2: #9d7bff;
+      --accent-3: #4af1b4;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --maxw: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(115, 224, 255, 0.18), transparent 22%),
+        radial-gradient(circle at 85% 18%, rgba(157, 123, 255, 0.20), transparent 24%),
+        radial-gradient(circle at 50% 85%, rgba(74, 241, 180, 0.12), transparent 18%),
+        linear-gradient(135deg, #040b14 0%, #07111f 45%, #0c1830 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 88%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      padding: 16px 20px 0;
+    }
+
+    nav {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      background: rgba(6, 15, 28, 0.68);
+      backdrop-filter: blur(20px);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 35px rgba(115, 224, 255, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 13px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,255,255,0.06));
+      mix-blend-mode: screen;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: 0.25s ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .hero {
+      max-width: var(--maxw);
+      margin: 28px auto 0;
+      padding: 40px 20px 20px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .glass {
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      backdrop-filter: blur(18px);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% 8% auto;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(115,224,255,0.18), transparent 62%);
+      filter: blur(20px);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: #d9e7fb;
+      background: rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-3), var(--accent));
+      box-shadow: 0 0 20px rgba(74,241,180,0.8);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      max-width: 10ch;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 15%, #9fe4ff 45%, #b79cff 78%, #7dffcf 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p.lead {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      max-width: 62ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #08111f;
+      box-shadow: 0 14px 32px rgba(115, 224, 255, 0.22);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .project-card:hover,
+    .info-card:hover,
+    .timeline-card:hover,
+    .contact-card:hover,
+    .cv-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+
+    .hero-metrics {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.55rem;
+      margin-bottom: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .hero-side {
+      display: grid;
+      grid-template-rows: 1.25fr 0.75fr;
+      gap: 22px;
+    }
+
+    .signal-card,
+    .focus-card {
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signal-card::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      right: -80px;
+      top: -90px;
+      background: radial-gradient(circle, rgba(157,123,255,0.22), transparent 62%);
+      filter: blur(10px);
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: 0.84rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .signal-visual {
+      margin: 24px 0;
+      height: 220px;
+      border-radius: 26px;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
+        radial-gradient(circle at 20% 35%, rgba(115,224,255,0.30), transparent 22%),
+        radial-gradient(circle at 70% 30%, rgba(157,123,255,0.22), transparent 24%),
+        radial-gradient(circle at 48% 70%, rgba(74,241,180,0.16), transparent 20%),
+        rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .signal-ring,
+    .signal-core,
+    .signal-path {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+
+    .signal-ring {
+      width: 160px;
+      height: 160px;
+      border: 1px solid rgba(115,224,255,0.25);
+      box-shadow: 0 0 0 18px rgba(115,224,255,0.06), 0 0 0 42px rgba(115,224,255,0.03);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .signal-core {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      box-shadow: 0 0 25px rgba(115,224,255,0.55);
+    }
+
+    .signal-path {
+      width: 280px;
+      height: 280px;
+      border: 1px dashed rgba(255,255,255,0.14);
+    }
+
+    .signal-card h3,
+    .focus-card h3,
+    .section-header h2,
+    .project-card h3,
+    .cv-card h3,
+    .contact-card h3,
+    .timeline-card h3,
+    .info-card h3 {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .signal-card p,
+    .focus-card p,
+    .section-header p,
+    .project-card p,
+    .cv-card p,
+    .contact-card p,
+    .timeline-card p,
+    .info-card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .focus-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #dce9ff;
+      font-size: 0.9rem;
+    }
+
+    section {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 60px 20px 0;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 26px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .info-card,
+    .timeline-card,
+    .project-card,
+    .cv-card,
+    .contact-card {
+      padding: 26px;
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      backdrop-filter: blur(18px);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .info-card:hover,
+    .timeline-card:hover,
+    .project-card:hover,
+    .cv-card:hover,
+    .contact-card:hover {
+      border-color: rgba(115,224,255,0.28);
+      background: rgba(10, 22, 40, 0.78);
+    }
+
+    .stats-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-stat {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .timeline-item:first-child { border-top: 0; padding-top: 0; }
+
+    .timeline-year {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .timeline-item h4 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-badge {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #dbe7ff;
+      font-size: 0.82rem;
+      margin-bottom: 18px;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      right: -40px;
+      bottom: -40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(115,224,255,0.16), transparent 65%);
+      pointer-events: none;
+    }
+
+    .project-links {
+      margin-top: auto;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding-top: 18px;
+    }
+
+    .project-links a,
+    .cv-links a,
+    .contact-links a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .cv-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .cv-list,
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .cv-item,
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer {
+      max-width: var(--maxw);
+      margin: 60px auto 0;
+      padding: 0 20px 30px;
+    }
+
+    .footer-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+
+    .footer-card strong { color: var(--text); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.75; }
+      50% { transform: translate(-50%, -50%) scale(1.03); opacity: 1; }
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .about-grid,
+      .section-header,
+      .project-grid,
+      .cv-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        grid-template-rows: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-wrap { top: 8px; padding: 10px 12px 0; }
+      nav {
+        border-radius: 26px;
+        padding: 14px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links {
+        justify-content: space-between;
+      }
+      .hero { padding-top: 22px; }
+      .hero-main,
+      .signal-card,
+      .focus-card,
+      .info-card,
+      .timeline-card,
+      .project-card,
+      .cv-card,
+      .contact-card { padding: 22px; }
+      .hero-main { min-height: auto; }
+      .hero-metrics,
+      .stats-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+      .footer-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="nav-wrap">
+      <nav>
+        <div class="brand">
+          <div class="brand-mark"></div>
+          <div class="brand-copy">
+            <strong>Premankur Banerjee</strong>
+            <span>VR / AR • Haptics • Robotics • Interactive Systems</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#home" class="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#cv">CV</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+
+    <header class="hero" id="home">
+      <section class="hero-card hero-main reveal">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> USC • HaRVI Lab • Multisensory XR Research</div>
+          <h1>
+            Designing the <span class="gradient-text">future of touch</span> in virtual and augmented worlds.
+          </h1>
+          <p class="lead">
+            I am Premankur Banerjee, a VR/AR haptics and robotics researcher building multisensory interactive systems that make virtual experiences feel more embodied, expressive, and physically coherent.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore Projects</a>
+            <a class="btn btn-secondary" href="#contact">Get in Touch</a>
+          </div>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric">
+            <strong>XR + Haptics</strong>
+            <span>Human-centered systems spanning VR, AR, wearable feedback, and robotics.</span>
+          </div>
+          <div class="metric">
+            <strong>Embodied Design</strong>
+            <span>Research focused on perception, realism, social touch, and multisensory interaction.</span>
+          </div>
+          <div class="metric">
+            <strong>Prototype to Study</strong>
+            <span>From hardware-software integration to evaluation in immersive environments.</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="hero-side">
+        <section class="glass signal-card reveal">
+          <div class="section-kicker">Research Signal</div>
+          <h3>Multisensory systems for immersive interaction</h3>
+          <p>
+            My work sits at the intersection of haptics, robotics, XR, and HCI — from social touch in virtual reality to physically grounded surfing simulations and wearable multimodal feedback.
+          </p>
+          <div class="signal-visual" aria-hidden="true">
+            <div class="signal-path"></div>
+            <div class="signal-ring"></div>
+            <div class="signal-core"></div>
+          </div>
+          <p>
+            I build interfaces where motion, sensation, perception, and embodiment come together as one coherent interaction loop.
+          </p>
+        </section>
+
+        <section class="glass focus-card reveal">
+          <div class="section-kicker">Focus Areas</div>
+          <h3>Core themes</h3>
+          <div class="focus-pills">
+            <span class="pill">Virtual Reality</span>
+            <span class="pill">Augmented Reality</span>
+            <span class="pill">Haptic Rendering</span>
+            <span class="pill">Wearable Devices</span>
+            <span class="pill">Robotics</span>
+            <span class="pill">Perception Studies</span>
+            <span class="pill">Social Touch</span>
+            <span class="pill">Human-Computer Interaction</span>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="section-header reveal">
+        <div>
+          <div class="section-kicker">About</div>
+          <h2>Research that blends engineering, perception, and embodiment.</h2>
+        </div>
+        <p>
+          I am a researcher in VR/AR, haptics, and robotics, with work centered on making immersive systems feel more natural, expressive, and physically meaningful. My interests include multisensory rendering, embodied interaction, mediated social touch, and interactive robotic systems for extended reality.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <article class="info-card reveal">
+          <h3>What I do</h3>
+          <p>
+            I design and evaluate immersive systems where sensing, control, and haptic feedback work together. That includes wearable haptic devices, real-time interaction pipelines, multimodal rendering, and user-centered experiments to understand comfort, realism, and social perception.
+          </p>
+          <div class="stats-grid">
+            <div class="mini-stat">
+              <strong>Haptics + XR</strong>
+              <span>Building interaction techniques that go beyond sight and sound.</span>
+            </div>
+            <div class="mini-stat">
+              <strong>Robotics</strong>
+              <span>Integrating motion, actuation, and physical interfaces into immersive systems.</span>
+            </div>
+            <div class="mini-stat">
+              <strong>User Studies</strong>
+              <span>Evaluating realism, comfort, perception, and social experience.</span>
+            </div>
+            <div class="mini-stat">
+              <strong>Prototyping</strong>
+              <span>From Unity and sensing pipelines to embedded systems and hardware control.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="timeline-card reveal">
+          <h3>Selected public milestones</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">USC</div>
+              <div>
+                <h4>HaRVI Lab researcher</h4>
+                <p>Publicly listed with USC’s Haptics Robotics and Virtual Interaction Lab.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Scholar</div>
+              <div>
+                <h4>Google Scholar profile</h4>
+                <p>Public profile associated with the University of Southern California and research in haptics, VR/AR, HCI, and robotics.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2025</div>
+              <div>
+                <h4>Virtual social touch</h4>
+                <p>Co-authored work on real-time, bi-directional social touch in multi-user VR.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2026</div>
+              <div>
+                <h4>SWIMVR</h4>
+                <p>Publications page lists SWIMVR on multimodal vibro-thermal water interaction rendering.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-header reveal">
+        <div>
+          <div class="section-kicker">Projects</div>
+          <h2>Selected research directions and systems.</h2>
+        </div>
+        <p>
+          This section is designed as a clean launchpad. You can later replace each summary with your final project descriptions, teaser images, paper links, videos, and GitHub repositories.
+        </p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card reveal">
+          <span class="project-badge">XR Surfing Simulation</span>
+          <h3>Surfing in Virtual Reality</h3>
+          <p>
+            A physically grounded surfing simulation integrating dynamic motion, interactive control, and immersive sensory feedback to recreate aquatic movement and wave interaction in VR.
+          </p>
+          <div class="project-links">
+            <a href="#contact">Request details</a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <span class="project-badge">Social Touch</span>
+          <h3>Virtual Encounters of the Haptic Kind</h3>
+          <p>
+            A multi-user VR system for real-time social touch communication using wearable haptic devices, exploring how mediated touch can support presence, affect, and connection across distance.
+          </p>
+          <div class="project-links">
+            <a href="#contact">Request paper</a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <span class="project-badge">Multimodal Water Rendering</span>
+          <h3>SWIMVR</h3>
+          <p>
+            A multisensory haptic system for simulating water interaction using vibro-thermal rendering, aimed at making virtual fluid interaction more convincing, nuanced, and embodied.
+          </p>
+          <div class="project-links">
+            <a href="#contact">Request details</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="cv">
+      <div class="section-header reveal">
+        <div>
+          <div class="section-kicker">CV</div>
+          <h2>A polished placeholder for your academic profile.</h2>
+        </div>
+        <p>
+          Replace the placeholders below with your latest CV PDF, Google Scholar, lab page, and any media or publication links you want highlighted.
+        </p>
+      </div>
+
+      <div class="cv-grid">
+        <article class="cv-card reveal">
+          <h3>Quick profile</h3>
+          <p>
+            VR/AR Haptics Robotics Researcher focused on multisensory interaction, embodied perception, wearable devices, and immersive human-computer interfaces.
+          </p>
+          <div class="cv-list">
+            <div class="cv-item">Affiliation: University of Southern California</div>
+            <div class="cv-item">Lab: HaRVI Lab</div>
+            <div class="cv-item">Domains: XR, Haptics, Robotics, HCI</div>
+            <div class="cv-item">Add your CV PDF link here</div>
+          </div>
+          <div class="cv-links" style="margin-top:18px; display:flex; gap:16px; flex-wrap:wrap;">
+            <a href="https://scholar.google.com/citations?hl=en&user=jOcj0OUAAAAJ" target="_blank" rel="noreferrer">Google Scholar</a>
+            <a href="https://sites.usc.edu/culbertson/about/staff/" target="_blank" rel="noreferrer">HaRVI Lab</a>
+          </div>
+        </article>
+
+        <article class="cv-card reveal">
+          <h3>What to add next</h3>
+          <p>
+            To make this site truly yours, plug in your downloadable CV, a headshot, project thumbnails, publication highlights, awards, teaching or mentoring, and a proper contact email.
+          </p>
+          <div class="cv-list">
+            <div class="cv-item">Upload a headshot or portrait</div>
+            <div class="cv-item">Link your CV as a PDF</div>
+            <div class="cv-item">Add publication or paper links</div>
+            <div class="cv-item">Add GitHub / LinkedIn / email</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-header reveal">
+        <div>
+          <div class="section-kicker">Contact</div>
+          <h2>Let’s build immersive systems that people can truly feel.</h2>
+        </div>
+        <p>
+          Use this section for collaboration, research inquiries, project demos, speaking, or academic contact. Replace the placeholder details with your preferred contact channels.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <article class="contact-card reveal">
+          <h3>Reach out</h3>
+          <p>
+            This page is intentionally structured so your contact section feels premium rather than like a generic footer. Add only the channels you actually want public.
+          </p>
+          <div class="contact-list">
+            <div class="contact-item">Email: yourname@usc.edu</div>
+            <div class="contact-item">LinkedIn: add your profile</div>
+            <div class="contact-item">Google Scholar: already linked above</div>
+          </div>
+        </article>
+
+        <article class="contact-card reveal">
+          <h3>Site note</h3>
+          <p>
+            This is a one-page portfolio with an immersive visual style: glassmorphism, depth, neon gradients, motion, and strong typography. It is meant to feel more like a research experience portal than a basic academic webpage.
+          </p>
+          <div class="contact-links" style="margin-top:18px; display:flex; gap:16px; flex-wrap:wrap;">
+            <a href="#home">Back to top</a>
+            <a href="#projects">See projects</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-card reveal">
+        <div>
+          <strong>Premankur Banerjee</strong><br/>
+          VR / AR Haptics Robotics Researcher
+        </div>
+        <div>Designed as a bold research portfolio landing page.</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const setActiveLink = () => {
+      let current = 'home';
+      sections.forEach(section => {
+        const top = window.scrollY;
+        const offset = section.offsetTop - 140;
+        const height = section.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    };
+
+    window.addEventListener('scroll', setActiveLink);
+    setActiveLink();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
