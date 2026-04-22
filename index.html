@@ -27,7 +27,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -247,6 +246,8 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+      align-items: flex-start;
+      text-align: left;
     }
 
     .hero p.lead,
@@ -256,6 +257,7 @@
       font-size: 1.08rem;
       line-height: 1.8;
       max-width: 100%;
+      text-align: left;
     }
 
     .hero-signal-text {
@@ -264,6 +266,7 @@
       font-size: 1rem;
       line-height: 1.8;
       max-width: 980px;
+      text-align: left;
     }
 
     .hero h1,
@@ -326,6 +329,10 @@
 
     .focus-tabs {
       padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
     }
 
     .focus-tabs-header {
@@ -333,9 +340,12 @@
       gap: 12px;
       margin-bottom: 18px;
       flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
     }
 
-    .tab-btn {
+    .tab-btn,
+    .subtab-btn {
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.05);
       color: var(--muted);
@@ -345,27 +355,43 @@
       font-weight: 700;
       cursor: pointer;
       transition: 0.25s ease;
+      text-align: left;
     }
 
     .tab-btn:hover,
-    .tab-btn.active {
+    .tab-btn.active,
+    .subtab-btn:hover,
+    .subtab-btn.active {
       color: var(--text);
       background: rgba(255,255,255,0.1);
       border-color: rgba(115,224,255,0.28);
     }
 
-    .tab-panel {
+    .tab-panel,
+    .skills-subpanel {
       display: none;
+      width: 100%;
+      text-align: left;
     }
 
-    .tab-panel.active {
+    .tab-panel.active,
+    .skills-subpanel.active {
       display: block;
     }
 
-    .focus-pills {
+    .focus-pills,
+    .skills-subtabs,
+    .skills-pills {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .skills-subtabs {
+      margin-bottom: 18px;
     }
 
     .pill {
@@ -375,6 +401,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       color: #dce9ff;
       font-size: 0.9rem;
+      text-align: left;
     }
 
     section {
@@ -764,9 +791,71 @@
         </div>
 
         <div class="tab-panel" id="tab-skills">
-          <div class="focus-pills">
-            <span class="pill">C++</span>
-            <span class="pill">C#</span>
+          <div class="skills-subtabs">
+            <button class="subtab-btn active" data-subtab="programming">Programming Software &amp; Tools</button>
+            <button class="subtab-btn" data-subtab="hardware">Hardware &amp; Sensing</button>
+            <button class="subtab-btn" data-subtab="methods">Methods &amp; Analysis</button>
+            <button class="subtab-btn" data-subtab="evaluation">User Testing &amp; Evaluation</button>
+          </div>
+
+          <div class="skills-subpanel active" id="subtab-programming">
+            <div class="skills-pills">
+              <span class="pill">C++</span>
+              <span class="pill">C</span>
+              <span class="pill">C#</span>
+              <span class="pill">Python</span>
+              <span class="pill">MATLAB</span>
+              <span class="pill">Unity 3D</span>
+              <span class="pill">CHAI3D</span>
+              <span class="pill">OpenHaptics</span>
+              <span class="pill">ROS</span>
+              <span class="pill">Gazebo</span>
+              <span class="pill">TensorFlow</span>
+              <span class="pill">Arduino</span>
+              <span class="pill">Blender</span>
+              <span class="pill">FreeCAD</span>
+              <span class="pill">OpenGL</span>
+            </div>
+          </div>
+
+          <div class="skills-subpanel" id="subtab-hardware">
+            <div class="skills-pills">
+              <span class="pill">Actuators</span>
+              <span class="pill">Force Sensing and Feedback</span>
+              <span class="pill">Pressure Sensing</span>
+              <span class="pill">IMUs</span>
+              <span class="pill">Motion Tracking (OptiTrack, Intel RealSense)</span>
+              <span class="pill">6-DoF Motion Platforms</span>
+              <span class="pill">Microcontrollers</span>
+              <span class="pill">Tactile Wearables</span>
+            </div>
+          </div>
+
+          <div class="skills-subpanel" id="subtab-methods">
+            <div class="skills-pills">
+              <span class="pill">Signal Processing</span>
+              <span class="pill">Filtering</span>
+              <span class="pill">Temporal Smoothing</span>
+              <span class="pill">Sensor Fusion</span>
+              <span class="pill">Physics Modeling</span>
+              <span class="pill">Inverse Kinematics</span>
+              <span class="pill">Wireless Communication Protocols</span>
+              <span class="pill">Teleoperation</span>
+              <span class="pill">CNNs</span>
+              <span class="pill">Autoencoders</span>
+              <span class="pill">Interactive ML</span>
+            </div>
+          </div>
+
+          <div class="skills-subpanel" id="subtab-evaluation">
+            <div class="skills-pills">
+              <span class="pill">Experimental Design</span>
+              <span class="pill">User-Centered Design</span>
+              <span class="pill">Protocol Creation</span>
+              <span class="pill">Data Processing</span>
+              <span class="pill">Statistical Analyses</span>
+              <span class="pill">Conducted 200+ user studies</span>
+            </div>
           </div>
         </div>
       </section>
@@ -1058,6 +1147,21 @@
 
         button.classList.add('active');
         document.getElementById(`tab-${target}`).classList.add('active');
+      });
+    });
+
+    const subtabButtons = document.querySelectorAll('.subtab-btn');
+    const subtabPanels = document.querySelectorAll('.skills-subpanel');
+
+    subtabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.subtab;
+
+        subtabButtons.forEach(btn => btn.classList.remove('active'));
+        subtabPanels.forEach(panel => panel.classList.remove('active'));
+
+        button.classList.add('active');
+        document.getElementById(`subtab-${target}`).classList.add('active');
       });
     });
   </script>
