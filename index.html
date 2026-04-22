@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Premankur Banerjee | VR/AR Haptics Robotics Researcher</title>
-  <meta
-    name="description"
-    content="Premankur Banerjee — VR/AR Haptics Robotics Researcher building multisensory, physically coherent interactive systems across haptics, robotics, XR, and human-computer interaction."
-  />
+  <meta name="description" content="Premankur Banerjee — VR/AR Haptics Robotics Researcher building multisensory, physically coherent interactive systems across haptics, robotics, XR, and human-computer interaction." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -598,6 +595,21 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
 
+    .contact-item a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #dce9ff;
+      word-break: break-word;
+    }
+
+    .contact-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
     footer {
       max-width: var(--maxw);
       margin: 60px auto 0;
@@ -949,8 +961,23 @@
             This page is intentionally structured so your contact section feels premium rather than like a generic footer. Add only the channels you actually want public.
           </p>
           <div class="contact-list">
-            <div class="contact-item">Email: premankur.banerjee@usc.edu</div>
-            <div class="contact-item">LinkedIn: https://www.linkedin.com/in/premankur-banerjee-4a5564159/</div>
+            <div class="contact-item">
+              <a href="mailto:premankur.banerjee@usc.edu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"></path>
+                  <path d="m22 8-8.97 5.7a2 2 0 0 1-2.06 0L2 8"></path>
+                </svg>
+                <span>premankur.banerjee@usc.edu</span>
+              </a>
+            </div>
+            <div class="contact-item">
+              <a href="https://www.linkedin.com/in/premankur-banerjee-4a5564159/" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A1.97 1.97 0 0 0 3.25 5c0 1.08.88 1.94 1.97 1.94H5.25A1.95 1.95 0 1 0 5.25 3ZM20.75 12.88c0-3.44-1.84-5.04-4.3-5.04-1.98 0-2.87 1.09-3.37 1.86V8.5H9.69c.05.79 0 11.5 0 11.5h3.39v-6.42c0-.34.02-.68.12-.92.27-.68.89-1.39 1.94-1.39 1.37 0 1.92 1.04 1.92 2.57V20H20.75v-7.12Z"></path>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
             <div class="contact-item">Google Scholar: already linked above</div>
           </div>
         </article>
