@@ -8,7 +8,7 @@
   --accent-2: #9d7bff;
   --accent-3: #4af1b4;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-  --maxw: 1500px;
+  --maxw: 1800px;
 }
 
 * { box-sizing: border-box; }
@@ -143,6 +143,7 @@ nav {
 
 .hero {
   max-width: var(--maxw);
+  width: 100%;
   margin: 28px auto 0;
   padding: 40px 20px 20px;
   display: grid;
@@ -331,6 +332,7 @@ nav {
 }
 
 .focus-tabs {
+  width: 100%
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
