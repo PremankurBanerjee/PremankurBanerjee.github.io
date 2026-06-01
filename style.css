@@ -784,7 +784,7 @@ footer {
 .news-list {
   display: grid;
   gap: 0;
-  max-height: 190px;
+  max-height: 360px;
   overflow: hidden;
   transition: max-height 0.35s ease;
 }
