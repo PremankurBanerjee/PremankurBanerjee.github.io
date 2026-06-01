@@ -778,7 +778,9 @@ footer {
 .news-card {
   overflow: hidden;
 }
-
+.news-card h3 {
+  margin-bottom: 18px;
+}
 .news-list {
   display: grid;
   gap: 0;
@@ -793,8 +795,8 @@ footer {
 
 .news-item {
   display: grid;
-  grid-template-columns: 90px minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 26px;
   padding: 15px 0;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
@@ -809,6 +811,7 @@ footer {
   font-weight: 700;
   font-size: 0.92rem;
   white-space: nowrap;
+  min-width: 150px;
 }
 
 .news-text {
@@ -839,5 +842,8 @@ footer {
   .news-item {
     grid-template-columns: 1fr;
     gap: 6px;
+  }
+    .news-date {
+    min-width: 0;
   }
 }
