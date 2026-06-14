@@ -716,6 +716,12 @@ section,
 .project-feature-header {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.14);
+}
+
 
 .project-feature:first-child .project-feature-header {
   padding-top: 0;
