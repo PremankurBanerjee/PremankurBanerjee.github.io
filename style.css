@@ -703,7 +703,7 @@ section,
   display: grid;
   gap: 24px;
 }
-
+<!--
 .project-feature-header {
   display: grid;
   grid-template-columns: 74px minmax(0, 1fr);
@@ -712,6 +712,10 @@ section,
   padding-top: 30px;
   border-top: 1px solid rgba(255,255,255,0.14);
 }
+-->
+.project-feature-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
 
 .project-feature:first-child .project-feature-header {
   padding-top: 0;
