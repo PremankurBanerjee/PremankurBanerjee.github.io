@@ -715,7 +715,7 @@ section,
 */
 .project-feature-header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: 74px minmax(0, 1fr);
     gap: 22px;
     align-items: start;
     padding-top: 30px;
