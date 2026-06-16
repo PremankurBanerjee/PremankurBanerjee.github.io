@@ -703,23 +703,11 @@ section,
   display: grid;
   gap: 24px;
 }
-/*
+
 .project-feature-header {
-  display: grid;
-  grid-template-columns: 74px minmax(0, 1fr);
-  gap: 22px;
-  align-items: start;
+  display: block;
   padding-top: 30px;
   border-top: 1px solid rgba(255,255,255,0.14);
-}
-*/
-.project-feature-header {
-  display: grid;
-  grid-template-columns: 74px minmax(0, 1fr);
-    gap: 22px;
-    align-items: start;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255,255,255,0.14);
 }
 
 
