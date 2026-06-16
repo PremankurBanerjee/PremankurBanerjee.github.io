@@ -739,7 +739,7 @@ section,
 
 .project-feature-header p {
   margin: 16px 0 0;
-  max-width: 960px;
+  max-width: none;
   color: var(--muted);
   line-height: 1.75;
   font-size: 1.04rem;
