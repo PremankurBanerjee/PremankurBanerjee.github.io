@@ -1088,3 +1088,12 @@ footer {
     min-width: 0;
   }
 }
+.project-part-copy h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.project-part-copy h3 a:hover {
+  color: var(--accent);
+}
