@@ -826,7 +826,7 @@ section,
 .project-part-copy h3 {
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  font-size: clamp(0.9rem, 1.3vw, 1.2rem);
   line-height: 1.15;
   letter-spacing: 0;
 }
