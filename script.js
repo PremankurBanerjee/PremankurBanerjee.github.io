@@ -70,125 +70,160 @@ if (newsList && seeMoreBtn) {
 }
 
 /* =========================================================
-   AUTOPLAYING AND LOOPING YOUTUBE SEGMENTS
+   AUTOPLAYING AND LOOPING YOUTUBE PROJECT VIDEOS
    ========================================================= */
 
-const youtubeSegmentElements =
-  document.querySelectorAll(".youtube-segment");
+const projectVideoClips = [
+  {
+    elementId: "surfing-player",
+    videoId: "LHdclthCQws",
+    startTime: 182, // 3:02
+    endTime: 204    // 3:24
+  },
+  {
+    elementId: "swimvr-player",
+    videoId: "3Orf-ua3N1Y",
+    startTime: 111, // 1:51
+    endTime: 118    // 1:58
+  }
+];
 
-if (youtubeSegmentElements.length > 0) {
-  const youtubeSegmentConfigs = [];
+const projectVideoPlayers = [];
 
-  /*
-   * Give every player its own automatically generated ID.
-   * This prevents multiple videos from being inserted into
-   * the same media block.
-   */
-  youtubeSegmentElements.forEach(function (element, index) {
-    const playerHost = document.createElement("div");
-    const playerId = `youtube-segment-player-${index}`;
 
-    playerHost.id = playerId;
-    playerHost.className = "youtube-player-host";
-    element.appendChild(playerHost);
+/*
+ * Load and play one selected section of a video.
+ */
+function loadProjectVideoClip(player, clip) {
+  player.mute();
 
-    youtubeSegmentConfigs.push({
-      playerId: playerId,
-      videoId: element.dataset.videoId,
-      startTime: Number(element.dataset.start),
-      endTime: Number(element.dataset.end),
-      title: element.dataset.title || "Project video"
-    });
+  player.loadVideoById({
+    videoId: clip.videoId,
+    startSeconds: clip.startTime,
+    endSeconds: clip.endTime
   });
+}
 
-  const youtubeSegmentPlayers = [];
 
-  function initializeYouTubeSegmentPlayers() {
-    youtubeSegmentConfigs.forEach(function (config) {
-      let loopInterval = null;
+/*
+ * YouTube calls this automatically after the
+ * IFrame Player API has loaded.
+ */
+window.onYouTubeIframeAPIReady = function () {
+  projectVideoClips.forEach(function (clip) {
+    const playerElement = document.getElementById(clip.elementId);
 
-      const player = new YT.Player(config.playerId, {
-        videoId: config.videoId,
+    if (!playerElement) {
+      console.warn(
+        `YouTube player element not found: ${clip.elementId}`
+      );
+      return;
+    }
 
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          playsinline: 1,
-          rel: 0,
-          start: config.startTime,
-          enablejsapi: 1
+    const playerVars = {
+      autoplay: 1,
+      controls: 0,
+      playsinline: 1,
+      rel: 0,
+      enablejsapi: 1
+    };
+
+    /*
+     * YouTube recommends specifying the website origin
+     * when controlling the player through JavaScript.
+     */
+    if (
+      window.location.protocol === "http:" ||
+      window.location.protocol === "https:"
+    ) {
+      playerVars.origin = window.location.origin;
+    }
+
+    const player = new YT.Player(clip.elementId, {
+      width: "100%",
+      height: "100%",
+      videoId: clip.videoId,
+      playerVars: playerVars,
+
+      events: {
+        onReady: function (event) {
+          loadProjectVideoClip(event.target, clip);
+
+          /*
+           * Timestamp fallback. If YouTube does not emit
+           * the ended state exactly at endSeconds, reload
+           * the selected segment manually.
+           */
+          window.setInterval(function () {
+            const currentTime = event.target.getCurrentTime();
+            const playerState = event.target.getPlayerState();
+
+            if (
+              playerState === YT.PlayerState.PLAYING &&
+              currentTime >= clip.endTime - 0.1
+            ) {
+              loadProjectVideoClip(event.target, clip);
+            }
+          }, 200);
         },
 
-        events: {
-          onReady: function (event) {
-            const iframe = event.target.getIframe();
-
-            if (iframe) {
-              iframe.title = config.title;
-            }
-
-            /*
-             * Muting is required for reliable browser autoplay.
-             */
-            event.target.mute();
-            event.target.seekTo(config.startTime, true);
-            event.target.playVideo();
-
-            /*
-             * Return to the selected start time when the video
-             * reaches the selected end time.
-             */
-            loopInterval = window.setInterval(function () {
-              const currentTime = event.target.getCurrentTime();
-
-              if (currentTime >= config.endTime) {
-                event.target.seekTo(config.startTime, true);
-                event.target.playVideo();
-              }
-            }, 100);
-          },
-
-          onStateChange: function (event) {
-            if (event.data === YT.PlayerState.ENDED) {
-              event.target.seekTo(config.startTime, true);
-              event.target.playVideo();
-            }
-          },
-
-          onError: function (event) {
-            console.error(
-              `YouTube player error for ${config.videoId}:`,
-              event.data
-            );
-
-            if (loopInterval) {
-              window.clearInterval(loopInterval);
-            }
+        onStateChange: function (event) {
+          /*
+           * Restart the selected clip when YouTube reports
+           * that playback has ended.
+           */
+          if (event.data === YT.PlayerState.ENDED) {
+            loadProjectVideoClip(event.target, clip);
           }
+        },
+
+        onAutoplayBlocked: function () {
+          console.warn(
+            `Autoplay was blocked for video: ${clip.videoId}`
+          );
+        },
+
+        onError: function (event) {
+          console.error(
+            `YouTube error ${event.data} for video ${clip.videoId}`
+          );
         }
-      });
-
-      youtubeSegmentPlayers.push(player);
+      }
     });
-  }
 
-  window.onYouTubeIframeAPIReady =
-    initializeYouTubeSegmentPlayers;
+    projectVideoPlayers.push(player);
+  });
+};
 
-  /*
-   * Load the YouTube API only once.
-   */
+
+/*
+ * Load the YouTube IFrame API only when this page
+ * contains at least one project video.
+ */
+const hasProjectVideos = projectVideoClips.some(function (clip) {
+  return document.getElementById(clip.elementId);
+});
+
+if (hasProjectVideos) {
   if (window.YT && typeof window.YT.Player === "function") {
-    initializeYouTubeSegmentPlayers();
+    window.onYouTubeIframeAPIReady();
   } else if (
     !document.querySelector(
       'script[src="https://www.youtube.com/iframe_api"]'
     )
   ) {
-    const youtubeApiScript = document.createElement("script");
+    const youtubeApiScript =
+      document.createElement("script");
+
     youtubeApiScript.src =
       "https://www.youtube.com/iframe_api";
 
-    document.head.appendChild(youtubeApiScript);
+    const firstScript =
+      document.getElementsByTagName("script")[0];
+
+    firstScript.parentNode.insertBefore(
+      youtubeApiScript,
+      firstScript
+    );
   }
 }
