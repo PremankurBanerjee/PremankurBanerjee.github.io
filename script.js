@@ -69,111 +69,126 @@ if (newsList && seeMoreBtn) {
   window.addEventListener('resize', checkNewsOverflow);
 }
 
-const youtubeSegmentVideos = [
-  {
-    elementId: "surfing-player",
-    videoId: "LHdclthCQws",
-    startTime: 181, // 3:01
-    endTime: 204    // 3:24
-  },
-  {
-    elementId: "impact-player",
-    videoId: "3Orf-ua3N1Y",
-    startTime: 111, // 1:51
-    endTime: 118    // 1:58
-  }
-];
+/* =========================================================
+   AUTOPLAYING AND LOOPING YOUTUBE SEGMENTS
+   ========================================================= */
 
-const youtubePlayers = [];
-let youtubePlayersInitialized = false;
+const youtubeSegmentElements =
+  document.querySelectorAll(".youtube-segment");
 
-/*
- * YouTube automatically calls this function when its
- * IFrame Player API has finished loading.
- */
-window.onYouTubeIframeAPIReady = function () {
-  if (youtubePlayersInitialized) return;
+if (youtubeSegmentElements.length > 0) {
+  const youtubeSegmentConfigs = [];
 
-  youtubePlayersInitialized = true;
+  /*
+   * Give every player its own automatically generated ID.
+   * This prevents multiple videos from being inserted into
+   * the same media block.
+   */
+  youtubeSegmentElements.forEach(function (element, index) {
+    const playerHost = document.createElement("div");
+    const playerId = `youtube-segment-player-${index}`;
 
-  youtubeSegmentVideos.forEach(function (videoConfig) {
-    const playerContainer = document.getElementById(videoConfig.elementId);
+    playerHost.id = playerId;
+    playerHost.className = "youtube-player-host";
+    element.appendChild(playerHost);
 
-    /*
-     * Skip this player if its HTML element is not present
-     * on the current page.
-     */
-    if (!playerContainer) return;
+    youtubeSegmentConfigs.push({
+      playerId: playerId,
+      videoId: element.dataset.videoId,
+      startTime: Number(element.dataset.start),
+      endTime: Number(element.dataset.end),
+      title: element.dataset.title || "Project video"
+    });
+  });
 
-    const player = new YT.Player(videoConfig.elementId, {
-      videoId: videoConfig.videoId,
+  const youtubeSegmentPlayers = [];
 
-      playerVars: {
-        autoplay: 1,
-        controls: 0,
-        playsinline: 1,
-        rel: 0,
-        start: videoConfig.startTime
-      },
+  function initializeYouTubeSegmentPlayers() {
+    youtubeSegmentConfigs.forEach(function (config) {
+      let loopInterval = null;
 
-      events: {
-        onReady: function (event) {
-          /*
-           * Browsers generally allow autoplay only when
-           * the video begins muted.
-           */
-          event.target.mute();
-          event.target.seekTo(videoConfig.startTime, true);
-          event.target.playVideo();
+      const player = new YT.Player(config.playerId, {
+        videoId: config.videoId,
 
-          /*
-           * Check the timestamp repeatedly. When the player
-           * reaches the selected end time, return to the start.
-           */
-          window.setInterval(function () {
-            const currentTime = event.target.getCurrentTime();
-            const playerState = event.target.getPlayerState();
-
-            if (
-              playerState === YT.PlayerState.PLAYING &&
-              currentTime >= videoConfig.endTime
-            ) {
-              event.target.seekTo(videoConfig.startTime, true);
-              event.target.playVideo();
-            }
-          }, 150);
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          playsinline: 1,
+          rel: 0,
+          start: config.startTime,
+          enablejsapi: 1
         },
 
-        /*
-         * Fallback in case the full YouTube video reaches
-         * its natural ending.
-         */
-        onStateChange: function (event) {
-          if (event.data === YT.PlayerState.ENDED) {
-            event.target.seekTo(videoConfig.startTime, true);
+        events: {
+          onReady: function (event) {
+            const iframe = event.target.getIframe();
+
+            if (iframe) {
+              iframe.title = config.title;
+            }
+
+            /*
+             * Muting is required for reliable browser autoplay.
+             */
+            event.target.mute();
+            event.target.seekTo(config.startTime, true);
             event.target.playVideo();
+
+            /*
+             * Return to the selected start time when the video
+             * reaches the selected end time.
+             */
+            loopInterval = window.setInterval(function () {
+              const currentTime = event.target.getCurrentTime();
+
+              if (currentTime >= config.endTime) {
+                event.target.seekTo(config.startTime, true);
+                event.target.playVideo();
+              }
+            }, 100);
+          },
+
+          onStateChange: function (event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              event.target.seekTo(config.startTime, true);
+              event.target.playVideo();
+            }
+          },
+
+          onError: function (event) {
+            console.error(
+              `YouTube player error for ${config.videoId}:`,
+              event.data
+            );
+
+            if (loopInterval) {
+              window.clearInterval(loopInterval);
+            }
           }
         }
-      }
+      });
+
+      youtubeSegmentPlayers.push(player);
     });
+  }
 
-    youtubePlayers.push(player);
-  });
-};
+  window.onYouTubeIframeAPIReady =
+    initializeYouTubeSegmentPlayers;
 
-/* Load the YouTube IFrame Player API only once */
-if (
-  document.getElementById("surfing-player") ||
-  document.getElementById("impact-player")
-) {
+  /*
+   * Load the YouTube API only once.
+   */
   if (window.YT && typeof window.YT.Player === "function") {
-    window.onYouTubeIframeAPIReady();
-  } else if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+    initializeYouTubeSegmentPlayers();
+  } else if (
+    !document.querySelector(
+      'script[src="https://www.youtube.com/iframe_api"]'
+    )
+  ) {
     const youtubeApiScript = document.createElement("script");
-    youtubeApiScript.src = "https://www.youtube.com/iframe_api";
+    youtubeApiScript.src =
+      "https://www.youtube.com/iframe_api";
+
     document.head.appendChild(youtubeApiScript);
   }
 }
-
-
-
