@@ -1098,22 +1098,22 @@ footer {
   color: var(--accent);
 }
 
-
+/* YouTube media blocks */
 .project-media.youtube-video {
   position: relative;
   display: block;
   width: 100%;
   min-height: 0;
   aspect-ratio: 16 / 9;
-  padding: 0 !important;
   margin: 0;
+  padding: 0 !important;
   overflow: hidden;
   background: #000;
   border-radius: 20px;
 }
 
-/* Applies to every YouTube player on the Projects page */
-.project-media.youtube-video > div,
+/* Fill the complete media area */
+.project-media.youtube-video .youtube-player-host,
 .project-media.youtube-video iframe {
   position: absolute;
   inset: 0;
@@ -1124,6 +1124,7 @@ footer {
   padding: 0;
   border: 0;
 }
+
 
 
 
