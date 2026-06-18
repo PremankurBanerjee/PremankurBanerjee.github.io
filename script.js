@@ -77,7 +77,7 @@ const youtubeSegmentVideos = [
     endTime: 204    // 3:24
   },
   {
-    elementId: "swimvr-player",
+    elementId: "impact-player",
     videoId: "3Orf-ua3N1Y",
     startTime: 111, // 1:51
     endTime: 118    // 1:58
@@ -164,7 +164,7 @@ window.onYouTubeIframeAPIReady = function () {
 /* Load the YouTube IFrame Player API only once */
 if (
   document.getElementById("surfing-player") ||
-  document.getElementById("swimvr-player")
+  document.getElementById("impact-player")
 ) {
   if (window.YT && typeof window.YT.Player === "function") {
     window.onYouTubeIframeAPIReady();
