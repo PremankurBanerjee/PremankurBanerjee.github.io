@@ -68,3 +68,75 @@ if (newsList && seeMoreBtn) {
 
   window.addEventListener('resize', checkNewsOverflow);
 }
+
+/* YouTube segment player for the surfing project */
+const SURFING_VIDEO_ID = "LHdclthCQws";
+const SURFING_START_TIME = 181;
+const SURFING_END_TIME = 204;
+
+let surfingPlayer = null;
+let surfingLoopInterval = null;
+
+const surfingPlayerElement = document.getElementById("surfing-player");
+
+if (surfingPlayerElement) {
+  /*
+   * YouTube calls this function automatically after the
+   * IFrame Player API has loaded.
+   */
+  window.onYouTubeIframeAPIReady = function () {
+    surfingPlayer = new YT.Player("surfing-player", {
+      videoId: SURFING_VIDEO_ID,
+
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        playsinline: 1,
+        rel: 0,
+        start: SURFING_START_TIME
+      },
+
+      events: {
+        onReady: function (event) {
+          /*
+           * Autoplay is much more reliable when the video
+           * begins muted.
+           */
+          event.target.mute();
+          event.target.seekTo(SURFING_START_TIME, true);
+          event.target.playVideo();
+
+          surfingLoopInterval = window.setInterval(function () {
+            if (
+              surfingPlayer &&
+              typeof surfingPlayer.getCurrentTime === "function" &&
+              surfingPlayer.getPlayerState() === YT.PlayerState.PLAYING &&
+              surfingPlayer.getCurrentTime() >= SURFING_END_TIME
+            ) {
+              surfingPlayer.seekTo(SURFING_START_TIME, true);
+              surfingPlayer.playVideo();
+            }
+          }, 200);
+        },
+
+        /*
+         * Fallback in case YouTube reaches the end state
+         * before the interval detects the selected end time.
+         */
+        onStateChange: function (event) {
+          if (event.data === YT.PlayerState.ENDED) {
+            event.target.seekTo(SURFING_START_TIME, true);
+            event.target.playVideo();
+          }
+        }
+      }
+    });
+  };
+
+  /* Load the YouTube IFrame Player API */
+  const youtubeApiScript = document.createElement("script");
+  youtubeApiScript.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(youtubeApiScript);
+}
+
+
