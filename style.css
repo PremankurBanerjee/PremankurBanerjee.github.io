@@ -1112,7 +1112,8 @@ footer {
   border-radius: 20px;
 }
 
-.project-media.youtube-video #surfing-player,
+/* Applies to every YouTube player on the Projects page */
+.project-media.youtube-video > div,
 .project-media.youtube-video iframe {
   position: absolute;
   inset: 0;
@@ -1123,5 +1124,7 @@ footer {
   padding: 0;
   border: 0;
 }
+
+
 
 
