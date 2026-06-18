@@ -69,74 +69,111 @@ if (newsList && seeMoreBtn) {
   window.addEventListener('resize', checkNewsOverflow);
 }
 
-/* YouTube segment player for the surfing project */
-const SURFING_VIDEO_ID = "LHdclthCQws";
-const SURFING_START_TIME = 181;
-const SURFING_END_TIME = 204;
+const youtubeSegmentVideos = [
+  {
+    elementId: "surfing-player",
+    videoId: "LHdclthCQws",
+    startTime: 181, // 3:01
+    endTime: 204    // 3:24
+  },
+  {
+    elementId: "swimvr-player",
+    videoId: "3Orf-ua3N1Y",
+    startTime: 111, // 1:51
+    endTime: 118    // 1:58
+  }
+];
 
-let surfingPlayer = null;
-let surfingLoopInterval = null;
+const youtubePlayers = [];
+let youtubePlayersInitialized = false;
 
-const surfingPlayerElement = document.getElementById("surfing-player");
+/*
+ * YouTube automatically calls this function when its
+ * IFrame Player API has finished loading.
+ */
+window.onYouTubeIframeAPIReady = function () {
+  if (youtubePlayersInitialized) return;
 
-if (surfingPlayerElement) {
-  /*
-   * YouTube calls this function automatically after the
-   * IFrame Player API has loaded.
-   */
-  window.onYouTubeIframeAPIReady = function () {
-    surfingPlayer = new YT.Player("surfing-player", {
-      videoId: SURFING_VIDEO_ID,
+  youtubePlayersInitialized = true;
+
+  youtubeSegmentVideos.forEach(function (videoConfig) {
+    const playerContainer = document.getElementById(videoConfig.elementId);
+
+    /*
+     * Skip this player if its HTML element is not present
+     * on the current page.
+     */
+    if (!playerContainer) return;
+
+    const player = new YT.Player(videoConfig.elementId, {
+      videoId: videoConfig.videoId,
 
       playerVars: {
         autoplay: 1,
         controls: 0,
         playsinline: 1,
         rel: 0,
-        start: SURFING_START_TIME
+        start: videoConfig.startTime
       },
 
       events: {
         onReady: function (event) {
           /*
-           * Autoplay is much more reliable when the video
-           * begins muted.
+           * Browsers generally allow autoplay only when
+           * the video begins muted.
            */
           event.target.mute();
-          event.target.seekTo(SURFING_START_TIME, true);
+          event.target.seekTo(videoConfig.startTime, true);
           event.target.playVideo();
 
-          surfingLoopInterval = window.setInterval(function () {
+          /*
+           * Check the timestamp repeatedly. When the player
+           * reaches the selected end time, return to the start.
+           */
+          window.setInterval(function () {
+            const currentTime = event.target.getCurrentTime();
+            const playerState = event.target.getPlayerState();
+
             if (
-              surfingPlayer &&
-              typeof surfingPlayer.getCurrentTime === "function" &&
-              surfingPlayer.getPlayerState() === YT.PlayerState.PLAYING &&
-              surfingPlayer.getCurrentTime() >= SURFING_END_TIME
+              playerState === YT.PlayerState.PLAYING &&
+              currentTime >= videoConfig.endTime
             ) {
-              surfingPlayer.seekTo(SURFING_START_TIME, true);
-              surfingPlayer.playVideo();
+              event.target.seekTo(videoConfig.startTime, true);
+              event.target.playVideo();
             }
-          }, 200);
+          }, 150);
         },
 
         /*
-         * Fallback in case YouTube reaches the end state
-         * before the interval detects the selected end time.
+         * Fallback in case the full YouTube video reaches
+         * its natural ending.
          */
         onStateChange: function (event) {
           if (event.data === YT.PlayerState.ENDED) {
-            event.target.seekTo(SURFING_START_TIME, true);
+            event.target.seekTo(videoConfig.startTime, true);
             event.target.playVideo();
           }
         }
       }
     });
-  };
 
-  /* Load the YouTube IFrame Player API */
-  const youtubeApiScript = document.createElement("script");
-  youtubeApiScript.src = "https://www.youtube.com/iframe_api";
-  document.head.appendChild(youtubeApiScript);
+    youtubePlayers.push(player);
+  });
+};
+
+/* Load the YouTube IFrame Player API only once */
+if (
+  document.getElementById("surfing-player") ||
+  document.getElementById("swimvr-player")
+) {
+  if (window.YT && typeof window.YT.Player === "function") {
+    window.onYouTubeIframeAPIReady();
+  } else if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+    const youtubeApiScript = document.createElement("script");
+    youtubeApiScript.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(youtubeApiScript);
+  }
 }
+
 
 
