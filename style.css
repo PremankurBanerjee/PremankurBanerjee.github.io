@@ -1124,6 +1124,9 @@ footer {
   padding: 0;
   border: 0;
 }
-
+.project-media video.align-video-left {
+  object-fit: cover;
+  object-position: left center;
+}
 
 
