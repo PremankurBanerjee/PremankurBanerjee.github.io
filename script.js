@@ -69,6 +69,46 @@ if (newsList && seeMoreBtn) {
   window.addEventListener('resize', checkNewsOverflow);
 }
 
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = String(formData.get('name') || '').trim();
+    const affiliation = String(formData.get('affiliation') || '').trim();
+    const subject = String(formData.get('subject') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+
+    const emailBody = [
+      `Name: ${name}`,
+      `Affiliation / who they are: ${affiliation}`,
+      '',
+      message
+    ].join('\n');
+
+    const mailtoLink = [
+      'mailto:premanku@usc.edu',
+      `?cc=${encodeURIComponent('gogolprem@gmail.com')}`,
+      `&subject=${encodeURIComponent(subject)}`,
+      `&body=${encodeURIComponent(emailBody)}`
+    ].join('');
+
+    const formCard = contactForm.closest('.contact-form-card');
+
+    if (formCard) {
+      formCard.innerHTML = `
+        <div class="contact-sent" role="status" aria-live="polite">
+          <h3>your message has been sent!</h3>
+        </div>
+      `;
+    }
+
+    window.location.href = mailtoLink;
+  });
+}
+
 /* =========================================================
    AUTOPLAYING AND LOOPING YOUTUBE PROJECT VIDEOS
    ========================================================= */
