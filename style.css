@@ -877,31 +877,33 @@ section,
 .contact-icons {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-top: 18px;
+  gap: 16px;
+  margin-top: 14px;
 }
 
 .contact-icon-link {
-  width: 44px;
-  height: 44px;
+  width: 22px;
+  height: 22px;
   display: inline-grid;
   place-items: center;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.05);
+  border-radius: 0;
+  border: 0;
+  background: transparent;
   color: var(--accent);
-  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  flex: 0 0 auto;
+  line-height: 0;
+  transition: transform 0.25s ease, color 0.25s ease;
 }
 
 .contact-icon-link:hover {
   transform: translateY(-2px);
-  border-color: rgba(115,224,255,0.32);
-  background: rgba(255,255,255,0.09);
+  color: var(--text);
 }
 
 .contact-icon-link svg {
-  width: 21px;
-  height: 21px;
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 .contact-form-card {
@@ -916,7 +918,7 @@ section,
 
 .contact-form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 18px;
 }
 
