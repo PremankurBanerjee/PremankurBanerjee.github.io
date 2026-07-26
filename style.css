@@ -297,6 +297,12 @@ nav {
   background-clip: text;
   color: transparent;
 }
+.gradient-text2 {
+  background: linear-gradient(135deg, #ffffff 15%, #ff0000 45%, #ae00ff 78%, #ff7700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 .hero-actions {
   display: flex;
