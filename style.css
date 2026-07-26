@@ -292,7 +292,7 @@ nav {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 15%, #9fe4ff 45%, #b79cff 78%, #7dffcf 100%);
+  background: linear-gradient(135deg, #ffffff 5%, #9fe4ff 45%, #b79cff 78%, #7dffcf 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
