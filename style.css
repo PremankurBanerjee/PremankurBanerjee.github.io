@@ -1266,3 +1266,70 @@ footer {
   }
 }
 
+/* =========================================================
+   COLORFUL FOCUS AREAS + SKILLS TABS
+   ========================================================= */
+
+.focus-tabs-header {
+  /* Change these four colors whenever you want */
+  --focus-color-1: #4af1b4;
+  --focus-color-2: #73e0ff;
+
+  --skills-color-1: #9d7bff;
+  --skills-color-2: #e180ff;
+}
+
+/* Shared button styling, similar to Explore Projects */
+.focus-tabs-header .tab-btn {
+  padding: 13px 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+
+  font-weight: 700;
+  color: #08111f;
+
+  cursor: pointer;
+  opacity: 0.72;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+/* Focus Areas color */
+.focus-tabs-header .tab-btn[data-tab="focus"] {
+  background: linear-gradient(
+    135deg,
+    var(--focus-color-1),
+    var(--focus-color-2)
+  );
+}
+
+/* Skills color */
+.focus-tabs-header .tab-btn[data-tab="skills"] {
+  background: linear-gradient(
+    135deg,
+    var(--skills-color-1),
+    var(--skills-color-2)
+  );
+}
+
+/* Hover effect */
+.focus-tabs-header .tab-btn:hover {
+  color: #08111f;
+  opacity: 1;
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+/* Currently selected tab */
+.focus-tabs-header .tab-btn.active {
+  color: #08111f;
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.25),
+    0 0 22px rgba(115, 224, 255, 0.18);
+}
