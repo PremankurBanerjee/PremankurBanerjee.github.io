@@ -1190,7 +1190,7 @@ footer {
 /* Larger introductory text styled like a subsection heading */
 .contact-main-card .contact-intro {
   width: 100%;
-  max-width: 1050px;
+  max-width: none;
 
   margin: 0;
 
@@ -1208,7 +1208,7 @@ footer {
   display: flex;
   align-items: center;
 
-  gap: 28px;
+  gap: 50px;
   margin-top: 30px;
 }
 
@@ -1225,8 +1225,8 @@ footer {
 
 /* Larger visible SVG icons */
 .contact-main-card .contact-icon-link svg {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
 }
 
 /* Mobile adjustments */
