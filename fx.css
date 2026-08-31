@@ -707,7 +707,7 @@ html.fx .footer-card:hover {
   html.fx *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    transition-duration: 0.01ms !important;
   }
 
   html.fx .reveal,
