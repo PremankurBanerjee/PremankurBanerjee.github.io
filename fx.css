@@ -73,6 +73,7 @@ html.fx[data-fx-page="contact"] {
    you moved.
    ============================================================================= */
 
+/* Page transitions disabled; other animation sections remain active. */
 /* Shared skin for both halves of the wavefront. Glowing energy bands sit on
    both vertical edges, so whichever edge happens to be the working one — the
    leading edge on the way out, the trailing edge on the way in — is lit. */
@@ -114,16 +115,16 @@ html.fx::after,
 /* Arriving half. A pseudo-element on <html> so it is painted on the very first
    frame — no flash of unstyled content, no JS timing dependency. */
 html.fx::after {
-  content: "";
+  /* content: ""; */
   z-index: 9999;
-  animation: fx-sweep-out 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* animation: fx-sweep-out 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards; */
 }
 
 /* Leaving half, created by fx.js and tinted with the DESTINATION colour so the
    handoff between the two pages is seamless. */
 .fx-exit {
   z-index: 9990;
-  animation: fx-sweep-in 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  /* animation: fx-sweep-in 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards; */
 }
 
 @keyframes fx-sweep-in {
@@ -138,7 +139,7 @@ html.fx::after {
 
 /* Sensor scanline crossing the other axis as the page settles. */
 html.fx::before {
-  content: "";
+  /* content: ""; */
   position: fixed;
   left: 0;
   right: 0;
@@ -148,7 +149,7 @@ html.fx::before {
   pointer-events: none;
   mix-blend-mode: screen;
   background: linear-gradient(180deg, transparent, var(--fx-scan) 45%, transparent);
-  animation: fx-scan 1.15s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+  /* animation: fx-scan 1.15s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both; */
 }
 
 @keyframes fx-scan {
@@ -160,7 +161,7 @@ html.fx::before {
 /* The content is carried along by the wave rather than fading in place: it
    leaves in the sweep direction and arrives still moving the same way. */
 html.fx .page {
-  animation: fx-page-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  /* animation: fx-page-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards; */
 }
 
 @keyframes fx-page-in {
@@ -169,7 +170,7 @@ html.fx .page {
 }
 
 html.fx-leaving .page {
-  animation: fx-page-out 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  /* animation: fx-page-out 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards; */
 }
 
 @keyframes fx-page-out {
@@ -184,13 +185,13 @@ html.fx-leaving .page {
    `backwards` (not `both`) means the hidden state only exists during the delay
    window — if the animation never runs, content is simply visible. */
 html.fx .page > * {
-  animation: fx-block-in 0.6s var(--fx-ease) backwards;
+  /* animation: fx-block-in 0.6s var(--fx-ease) backwards; */
 }
-html.fx .page > *:nth-child(1)   { animation-delay: 0.06s; }
-html.fx .page > *:nth-child(2)   { animation-delay: 0.14s; }
-html.fx .page > *:nth-child(3)   { animation-delay: 0.21s; }
-html.fx .page > *:nth-child(4)   { animation-delay: 0.27s; }
-html.fx .page > *:nth-child(n+5) { animation-delay: 0.32s; }
+/* html.fx .page > *:nth-child(1)   { animation-delay: 0.06s; } */
+/* html.fx .page > *:nth-child(2)   { animation-delay: 0.14s; } */
+/* html.fx .page > *:nth-child(3)   { animation-delay: 0.21s; } */
+/* html.fx .page > *:nth-child(4)   { animation-delay: 0.27s; } */
+/* html.fx .page > *:nth-child(n+5) { animation-delay: 0.32s; } */
 
 @keyframes fx-block-in {
   from { opacity: 0; transform: translateY(16px); filter: blur(4px); }

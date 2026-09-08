@@ -155,34 +155,35 @@
     el.style.setProperty('--fx-glow-2', t[3]);
   }
 
-  document.addEventListener('click', function (event) {
-    if (event.defaultPrevented) return;
-    if (event.button !== 0) return;
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-    var link = event.target && event.target.closest ? event.target.closest('a') : null;
-    if (!link) return;
-    if (link.hasAttribute('download')) return;
-    if (link.target && link.target !== '_self') return;
-
-    var href = link.getAttribute('href');
-    if (!href || href.charAt(0) === '#') return;
-    if (/^(mailto:|tel:|javascript:)/i.test(href)) return;
-
-    var url;
-    try { url = new URL(link.href, location.href); } catch (e) { return; }
-
-    if (!isInternalPage(url)) return;
-    if (url.pathname === location.pathname && url.search === location.search) return;
-
-    event.preventDefault();
-
-    var rect = link.getBoundingClientRect();
-    var x = event.clientX || (rect.left + rect.width / 2);
-    var y = event.clientY || (rect.top + rect.height / 2);
-
-    leaveTo(url.href, x, y, pageKeyFor(url.pathname));
-  });
+// Page transitions disabled: let links use normal browser navigation.
+//   document.addEventListener('click', function (event) {
+//     if (event.defaultPrevented) return;
+//     if (event.button !== 0) return;
+//     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+//
+//     var link = event.target && event.target.closest ? event.target.closest('a') : null;
+//     if (!link) return;
+//     if (link.hasAttribute('download')) return;
+//     if (link.target && link.target !== '_self') return;
+//
+//     var href = link.getAttribute('href');
+//     if (!href || href.charAt(0) === '#') return;
+//     if (/^(mailto:|tel:|javascript:)/i.test(href)) return;
+//
+//     var url;
+//     try { url = new URL(link.href, location.href); } catch (e) { return; }
+//
+//     if (!isInternalPage(url)) return;
+//     if (url.pathname === location.pathname && url.search === location.search) return;
+//
+//     event.preventDefault();
+//
+//     var rect = link.getBoundingClientRect();
+//     var x = event.clientX || (rect.left + rect.width / 2);
+//     var y = event.clientY || (rect.top + rect.height / 2);
+//
+//     leaveTo(url.href, x, y, pageKeyFor(url.pathname));
+//   });
 
 
   /* ===========================================================================
